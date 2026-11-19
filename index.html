@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Rest Palace Guest House</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap">
+<style>
+/* Layout (BRAMBLE + Skyline Residences templates): full-bleed photo hero with a giant wordmark across the bottom,
+   corner "BOOK A ROOM" box, short statement top-left, info rail along the bottom edge; then a dark band with a
+   polaroid photo strip; a room catalogue; amenities; one big review; booking form; directions.
+   Single theme in Rest Palace's own colours: logo brown + gold on cream. */
+:root{
+  --cream:#F7F1E7;
+  --paper:#FFFCF6;
+  --brown:#673304;     /* sampled from the R emblem */
+  --brown-deep:#3B1D04;
+  --gold:#CD9934;      /* sampled gold */
+  --ink:#2A1606;
+  --soft:#7A6656;
+  --line:#E6DACA;
+  --polaroid:#FFF9EC;
+  --wordmark:"Cinzel", "Trajan Pro", Georgia, serif;
+  --body:"DM Sans", "Segoe UI", system-ui, sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--cream);color:var(--ink);font:16px/1.65 var(--body);margin:0}
+.wrap{max-width:1220px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--wordmark);font-weight:500;margin:0;line-height:1.05;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.box{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1.5px solid currentColor;padding:12px 20px;font:600 13px var(--body);letter-spacing:.16em;text-transform:uppercase;text-decoration:none;cursor:pointer;background:transparent}
+.box.solid{background:var(--gold);border-color:var(--gold);color:var(--brown-deep)}
+.eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600}
+
+/* hero */
+.hero{position:relative;min-height:min(100vh,860px);color:#fff;display:flex;flex-direction:column;overflow:hidden;background:var(--brown-deep)}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 55%}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(42,22,6,.55) 0%,rgba(42,22,6,.15) 35%,rgba(42,22,6,.35) 62%,rgba(42,22,6,.88) 100%);z-index:1}
+.hero>*:not(img){position:relative;z-index:2}
+.topbar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;padding-top:calc(18px + env(safe-area-inset-top,0px));padding-bottom:18px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand img{height:40px;width:auto}
+.brand span{font:500 15px/1.1 var(--wordmark);letter-spacing:.14em}
+.brand small{display:block;font:500 9px var(--body);letter-spacing:.42em;margin-top:4px;opacity:.85}
+.topbar .mid{font-size:13px;letter-spacing:.16em;text-transform:uppercase;opacity:.9;text-align:center}
+.topbar .r{justify-self:end}
+.hero .state{display:flex;justify-content:space-between;gap:30px;margin-top:20px}
+.hero .state p{max-width:30ch;font-size:19px;line-height:1.45}
+.hero .state .side{max-width:24ch;font-size:15px;opacity:.9;text-align:right}
+.hero .state .side a{display:inline-block;margin-top:10px;font-weight:600;border-bottom:1px solid currentColor;text-decoration:none}
+.hero .word{margin-top:auto;font-family:var(--wordmark);font-weight:400;line-height:.82;font-size:clamp(64px,13.5vw,220px);letter-spacing:-.01em;white-space:nowrap;text-shadow:0 10px 40px rgba(0,0,0,.25)}
+.rail{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center;border-top:1px solid rgba(255,255,255,.3);margin-top:22px;padding-block:16px calc(16px + env(safe-area-inset-bottom,0px));font-size:14px;opacity:.92}
+.rail .c{border-left:1px solid rgba(255,255,255,.4);padding-left:12px}
+.rail .r{text-align:right}
+@media (max-width:820px){.topbar{grid-template-columns:auto auto}.topbar .mid{display:none}.hero .state{flex-direction:column}.hero .state .side{text-align:left}.hero .word{font-size:clamp(48px,15vw,90px);white-space:normal}.rail{grid-template-columns:1fr}.rail .c{display:none}.rail .r{text-align:left}.brand span{font-size:13px}}
+
+/* polaroid band */
+.band{background:var(--brown-deep);color:var(--cream);padding-block:64px 72px;overflow:hidden}
+.band h2{font-size:clamp(20px,2.4vw,30px);text-align:center;letter-spacing:.06em}
+.strip{display:flex;gap:26px;margin-top:40px;width:max-content;padding-inline:max(16px,env(safe-area-inset-left,0px))}
+.pol{background:var(--polaroid);padding:14px 14px 48px;width:260px;flex:none;box-shadow:0 20px 40px -20px rgba(0,0,0,.6);position:relative}
+.pol:nth-child(odd){transform:rotate(-2deg)}.pol:nth-child(even){transform:rotate(1.6deg) translateY(14px)}
+.pol img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block}
+.pol span{position:absolute;left:14px;right:14px;bottom:14px;color:var(--brown);font:500 15px var(--wordmark);text-align:center}
+.stripwrap{overflow-x:auto;scrollbar-width:none;padding-bottom:20px}
+.stripwrap::-webkit-scrollbar{display:none}
+@media (prefers-reduced-motion:no-preference){.strip{animation:drift 60s linear infinite alternate}@keyframes drift{to{transform:translateX(calc(-100% + 100vw))}}.stripwrap:hover .strip{animation-play-state:paused}}
+
+/* rooms */
+section{padding-block:84px}
+.head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap}
+.head h2{font-size:clamp(34px,4.6vw,60px);color:var(--brown)}
+.head p{color:var(--soft);max-width:42ch}
+.rooms{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:40px}
+.room{background:var(--paper);border:1px solid var(--line);display:flex;flex-direction:column}
+.room img{width:100%;aspect-ratio:4/3.4;object-fit:cover}
+.room .in{padding:20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.room h3{font-size:22px;color:var(--brown)}
+.room ul{list-style:none;padding:0;margin:4px 0 0;display:flex;flex-wrap:wrap;gap:6px}
+.room li{font-size:13px;border:1px solid var(--line);padding:3px 9px;color:var(--soft)}
+.room .box{margin-top:auto;align-self:flex-start;color:var(--brown)}
+@media (max-width:900px){.rooms{grid-template-columns:1fr}}
+
+/* amenities + quote */
+.amen{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:40px}
+.amen div{background:var(--cream);padding:24px}
+.amen b{display:block;font:500 20px var(--wordmark);color:var(--brown)}
+.amen span{color:var(--soft);font-size:14px}
+@media (max-width:820px){.amen{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.quote{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:center}
+.quote img{width:100%;aspect-ratio:3/2;object-fit:cover}
+.quote q{font:400 clamp(24px,2.8vw,36px)/1.25 var(--wordmark);color:var(--brown);quotes:"“" "”"}
+.quote cite{display:block;font-style:normal;color:var(--soft);margin-top:18px;font-size:15px}
+.stars{color:var(--gold);letter-spacing:3px;margin-bottom:14px}
+@media (max-width:820px){.quote{grid-template-columns:1fr}}
+
+/* booking */
+.book{background:var(--brown);color:var(--cream)}
+.book .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:44px;align-items:start}
+.book h2{font-size:clamp(34px,4.6vw,60px)}
+.book p.sub{color:#e8d6bf;margin-top:14px;max-width:40ch}
+.book .calls{margin-top:26px;display:grid;gap:6px;font-size:15px}
+.book .calls b{color:#fff}
+form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;background:rgba(0,0,0,.18);padding:24px;border:1px solid rgba(255,255,255,.15)}
+form .full{grid-column:1/-1}
+label{display:block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#e8d6bf;margin-bottom:6px}
+input,select{width:100%;min-width:0;font:500 16px var(--body);color:var(--ink);background:var(--cream);border:0;padding:12px}
+.nights{font-size:14px;color:#f3e3cc}
+form .box{width:100%}
+@media (max-width:820px){.book .wrap{grid-template-columns:1fr}}
+@media (max-width:440px){form{grid-template-columns:1fr}}
+
+/* find */
+.find{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:30px;align-items:center}
+.find img{width:100%;aspect-ratio:1/1;object-fit:cover}
+.find dl{display:grid;grid-template-columns:auto 1fr;gap:10px 20px;margin:22px 0 0}
+.find dt{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);padding-top:3px}
+.find dd{margin:0}
+@media (max-width:820px){.find{grid-template-columns:1fr}}
+footer{background:var(--brown-deep);color:#d9c6ad;font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center;padding-block:24px calc(24px + env(safe-area-inset-bottom,0px))}
+footer img{height:36px}
+</style>
+<style>body{margin:0}</style>
+</head>
+<body>
+
+<header class="hero" id="top">
+  <img src="img/room-hero.webp" alt="A bright guest room at Rest Palace with a double bed, table and chairs">
+  <div class="wrap topbar">
+    <a class="brand" href="#top"><img src="img/emblem_white.png" alt=""><span>REST PALACE<small>GUEST HOUSE</small></span></a>
+    <div class="mid">Ashaley Botwe · Accra</div>
+    <div class="r"><a class="box" href="#book">Book a room</a></div>
+  </div>
+  <div class="wrap state">
+    <p>A quiet, serene place to rest. Cool rooms, hot showers and Wi-Fi, five hundred metres from School Junction.</p>
+    <div class="side">Rooms for business trips, weekends and visiting family.<br><a href="#rooms">See the rooms</a></div>
+  </div>
+  <div class="wrap" style="margin-top:auto">
+    <h1 class="word">Rest Palace</h1>
+    <div class="rail"><span>Guest House · Nmai-Dzorn, Ashaley Botwe</span><span class="c">Scroll to look around</span><span class="r">★ 4.5 · 106 Google reviews</span></div>
+  </div>
+</header>
+
+<main>
+  <div class="band">
+    <h2>Quiet rooms + hot showers + cool air = good sleep.</h2>
+    <div class="stripwrap"><div class="strip">
+      <figure class="pol" style="margin:0"><img src="img/exterior.webp" alt="Rest Palace at dusk with the lights on"><span>Home for the night</span></figure>
+      <figure class="pol" style="margin:0"><img src="img/aerial.webp" alt="Aerial view of the red roofs of Rest Palace"><span>From above</span></figure>
+      <figure class="pol" style="margin:0"><img src="img/room-green.webp" alt="Guest room with a TV and armchairs"><span>Room with a view</span></figure>
+      <figure class="pol" style="margin:0"><img src="img/staff1.webp" alt="A member of staff arranging pillows on a bed"><span>Made up fresh</span></figure>
+      <figure class="pol" style="margin:0"><img src="img/bath.webp" alt="A clean bathroom with a water heater and shower"><span>Hot water, always</span></figure>
+      <figure class="pol" style="margin:0"><img src="img/dining.webp" alt="Guests sharing a meal at a small table"><span>Good company</span></figure>
+      <figure class="pol" style="margin:0"><img src="img/romance.webp" alt="A bed decorated with rose petals"><span>Special occasions</span></figure>
+    </div></div>
+  </div>
+
+  <section id="rooms">
+    <div class="wrap">
+      <div class="head"><div><div class="eyebrow">Our rooms</div><h2 style="margin-top:12px">Choose your room</h2></div><p>Every room is air-conditioned, with a water heater and Wi-Fi. Tell us your dates and we'll confirm what's free.</p></div>
+      <div class="rooms">
+        <article class="room"><img src="img/room-hero.webp" alt="Bright room with a double bed and a small table for two"><div class="in"><h3>Bright double</h3><ul><li>Double bed</li><li>Table for two</li><li>AC</li><li>Hot water</li></ul><a class="box" href="#book" data-room="Bright double">Ask for this room</a></div></article>
+        <article class="room"><img src="img/room-tv.webp" alt="Room with a wall-mounted TV and a mini fridge"><div class="in"><h3>TV &amp; fridge room</h3><ul><li>Flat-screen TV</li><li>Mini fridge</li><li>AC</li><li>Wi-Fi</li></ul><a class="box" href="#book" data-room="TV & fridge room">Ask for this room</a></div></article>
+        <article class="room"><img src="img/room-wardrobe.webp" alt="Room with a large wardrobe and a mirror"><div class="in"><h3>Wardrobe room</h3><ul><li>Full wardrobe</li><li>Mirror</li><li>AC</li><li>Hot water</li></ul><a class="box" href="#book" data-room="Wardrobe room">Ask for this room</a></div></article>
+      </div>
+      <div class="amen">
+        <div><b>Air-conditioned</b><span>in every room</span></div>
+        <div><b>Water heaters</b><span>hot showers day and night</span></div>
+        <div><b>Free Wi-Fi</b><span>work or stream from your room</span></div>
+        <div><b>Quiet street</b><span>serene, away from the noise</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap quote">
+      <img src="img/staff2.webp" alt="Rest Palace staff making up a bed with colourful pillows">
+      <div><div class="stars">★★★★★</div><q>The place is really serene and cozy. It is one of the few hotels where I can actually sleep comfortably, just like I am at home.</q><cite>Manasseh Z., Google review</cite></div>
+    </div>
+  </section>
+
+  <section class="book" id="book">
+    <div class="wrap">
+      <div>
+        <div class="eyebrow">Book direct</div>
+        <h2 style="margin-top:12px">Your dates, our best room.</h2>
+        <p class="sub">Send your dates and we'll reply on WhatsApp with what's available and the price.</p>
+        <div class="calls"><span>WhatsApp / call <b>024 315 6085</b></span><span>Front desk <b>030 290 9951</b></span><span>Email <b>restpalacegh@gmail.com</b></span></div>
+      </div>
+      <form id="bk" novalidate>
+        <div><label for="ci">Check-in</label><input id="ci" type="date"></div>
+        <div><label for="co">Check-out</label><input id="co" type="date"></div>
+        <div><label for="gu">Guests</label><select id="gu"><option>1 guest</option><option selected>2 guests</option><option>3 guests</option><option>4+ guests</option></select></div>
+        <div><label for="rm">Room</label><select id="rm"><option>Any available room</option><option>Bright double</option><option>TV &amp; fridge room</option><option>Wardrobe room</option></select></div>
+        <div class="full"><label for="nm">Your name</label><input id="nm" autocomplete="name" placeholder="e.g. Efua Owusu"></div>
+        <div class="full nights" id="nights"></div>
+        <div class="full"><a class="box solid" id="send" href="#" target="_blank" rel="noopener">Send booking request on WhatsApp</a></div>
+      </form>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap find">
+      <div>
+        <div class="eyebrow">Find us</div>
+        <h2 style="margin-top:12px;font-size:clamp(34px,4.6vw,60px);color:var(--brown)">500 metres from School Junction.</h2>
+        <dl>
+          <dt>Address</dt><dd>Nmai-Dzorn, 500 metres from School Junction on Nana Krom road, Ashaley Botwe, Accra</dd>
+          <dt>Landmark</dt><dd>Ask for School Junction, then follow Nana Krom road</dd>
+          <dt>Call</dt><dd>024 315 6085 · 030 290 9951</dd>
+        </dl>
+        <p style="margin-top:24px"><a class="box" style="color:var(--brown)" href="https://www.google.com/maps/search/?api=1&amp;query=REST+PALACE+GUEST+HOUSE+Madina" target="_blank" rel="noopener">Open in Google Maps</a></p>
+      </div>
+      <img src="img/aerial.webp" alt="Aerial photo of Rest Palace and the surrounding street">
+    </div>
+  </section>
+</main>
+<footer><div class="wrap"><img src="img/emblem_white.png" alt="Rest Palace"><span>© 2026 Rest Palace Guest House · Ashaley Botwe, Accra · @restpalacegh</span></div></footer>
+
+<script>
+(function(){
+const $=id=>document.getElementById(id), iso=d=>d.toISOString().slice(0,10), now=Date.now();
+$('ci').value=iso(new Date(now+7*864e5)); $('co').value=iso(new Date(now+9*864e5)); $('ci').min=iso(new Date(now));
+const fmt=v=>v?new Date(v+'T12:00').toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'}):'?';
+function upd(){
+  const n=Math.round((new Date($('co').value)-new Date($('ci').value))/864e5);
+  $('nights').textContent=n>0?`${n} night${n>1?'s':''} · ${fmt($('ci').value)} → ${fmt($('co').value)}`:'Check-out must be after check-in.';
+  let m=`Hello Rest Palace, I'd like to book.\nCheck-in: ${fmt($('ci').value)}\nCheck-out: ${fmt($('co').value)}${n>0?` (${n} night${n>1?'s':''})`:''}\nGuests: ${$('gu').value}\nRoom: ${$('rm').value}`;
+  if($('nm').value.trim()) m+=`\nName: ${$('nm').value.trim()}`;
+  $('send').href='https://wa.me/233243156085?text='+encodeURIComponent(m);
+}
+['ci','co','gu','rm','nm'].forEach(id=>$(id).addEventListener('input',upd));
+document.querySelectorAll('[data-room]').forEach(a=>a.addEventListener('click',()=>{$('rm').value=a.dataset.room;upd();}));
+$('bk').addEventListener('submit',e=>e.preventDefault());
+upd();
+})();
+</script>
+
+</body>
+</html>
